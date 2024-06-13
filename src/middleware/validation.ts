@@ -16,10 +16,10 @@ const handleValidationErrors = async (
 
 export const validateMyUserRequest = [
   body("name").isString().notEmpty().withMessage("Name is required"),
-  body("adressLine1")
+  body("addressLine1")
     .isString()
     .notEmpty()
-    .withMessage("AdressLine1 is required"),
+    .withMessage("AddressLine1 is required"),
   body("city").isString().notEmpty().withMessage("City is required"),
   body("country").isString().notEmpty().withMessage("Country is required"),
   handleValidationErrors,
