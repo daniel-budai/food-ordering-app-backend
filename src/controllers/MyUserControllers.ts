@@ -1,6 +1,19 @@
 import { Request, Response } from "express";
 import User from "../models/user";
 
+const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const currentUser = await User.findOne({ _id: req.userID });
+    if (!currentUser) {
+      return res.status(404).json({ message: "user not found" });
+    }
+    res.json(currentUser);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "something went wrong" });
+  }
+};
+
 const createCurrentUser = async (req: Request, res: Response) => {
   try {
     const { Auth0Id } = req.body; //check if the user exist
@@ -16,7 +29,7 @@ const createCurrentUser = async (req: Request, res: Response) => {
     res.status(201).json(newUser.toObject());
   } catch (error) {
     console.log(error);
-    res.status(500).json({ messege: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -44,6 +57,7 @@ const updateCurrentUser = async (req: Request, res: Response) => {
 };
 
 export default {
+  getCurrentUser,
   createCurrentUser,
   updateCurrentUser,
 };

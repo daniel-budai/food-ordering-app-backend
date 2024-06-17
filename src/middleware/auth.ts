@@ -30,6 +30,8 @@ export const jwtParse = async (
   }
   const token = authorization.split(" ")[1];
 
+  console.log(token);
+
   try {
     const decoded = jwt.decode(token) as jwt.JwtPayload;
     const auth0 = decoded.sub;
