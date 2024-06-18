@@ -9,7 +9,7 @@ mongoose
   .then(() => console.log("connected to database")); //casting
 
 const app = express();
-app.use(express.json()); //middlewear, convert request body to json
+app.use(express.json());
 app.use(cors());
 
 app.get("/health", async (req: Request, res: Response) => {

@@ -9,7 +9,6 @@ const getCurrentUser = async (req: Request, res: Response) => {
     }
     res.json(currentUser);
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: "something went wrong" });
   }
 };
@@ -28,7 +27,6 @@ const createCurrentUser = async (req: Request, res: Response) => {
 
     res.status(201).json(newUser.toObject());
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -51,7 +49,6 @@ const updateCurrentUser = async (req: Request, res: Response) => {
 
     res.send(user);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "error updating user" });
   }
 };

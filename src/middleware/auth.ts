@@ -30,29 +30,18 @@ export const jwtParse = async (
   }
   const token = authorization.split(" ")[1];
 
-  console.log(token);
-
   try {
-    console.log("1");
-
     const decoded = jwt.decode(token) as jwt.JwtPayload;
-    console.log("2");
 
     const Auth0Id = decoded.sub;
-    console.log(Auth0Id);
-    console.log("3");
 
     const user = await User.findOne({ Auth0Id });
-    console.log("4");
     if (!user) {
-      console.log("5");
-      console.log(user);
       return res.status(401).json({ message: "user not found" });
     }
-
     req.auth0 = Auth0Id as string;
     req.userID = user._id.toString();
-    console.log("fdsfsdfsdf");
+
     next();
   } catch (error) {
     return res.status(401);
