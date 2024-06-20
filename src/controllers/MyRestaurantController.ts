@@ -3,6 +3,19 @@ import Restaurant from "../models/restaurant";
 import cloudinary from "cloudinary";
 import mongoose from "mongoose";
 
+const getMyRestaurant = async (req: Request, res: Response) => {
+  try {
+    const restaurant = await Restaurant.findOne({ user: req.userID });
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+    res.json(restaurant);
+  } catch (error) {
+    console.log("error", error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 const createMyRestaurant = async (req: Request, res: Response) => {
   try {
     const existingRestaurant = await Restaurant.findOne({
@@ -34,4 +47,4 @@ const createMyRestaurant = async (req: Request, res: Response) => {
   }
 };
 
-export default { createMyRestaurant };
+export default { createMyRestaurant, getMyRestaurant };
