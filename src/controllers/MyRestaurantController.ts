@@ -55,7 +55,7 @@ const updateMyRestaurant = async (req: Request, res: Response) => {
     if (!restaurant) {
       return res.status(404).json({ message: "Restaurant not found" });
     }
-    //restaurant.restaurantName = req.body.restaurantName;
+    restaurant.restaurantName = req.body.restaurantName;
     restaurant.city = req.body.city;
     restaurant.country = req.body.country;
     restaurant.deliveryPrice = req.body.deliveryPrice;
