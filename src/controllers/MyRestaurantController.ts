@@ -21,7 +21,9 @@ const createMyRestaurant = async (req: Request, res: Response) => {
     const uploadRespond = await cloudinary.v2.uploader.upload(dataURI);
 
     const restaurant = new Restaurant(req.body);
+
     restaurant.imageUrl = uploadRespond.url;
+
     restaurant.user = new mongoose.Types.ObjectId(req.userID);
     restaurant.lastUpdated = new Date();
     await restaurant.save();
