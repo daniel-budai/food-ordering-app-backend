@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { Request, Response } from "express";
 import Restaurant, { MenuItemType } from "../models/restaurant";
 
-const STRIPE = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+const STRIPE = new Stripe(process.env.STRIPE_API_KEY as string);
 const FRONTEND_URL = process.env.FRONTEND_URL as string;
 
 type CheckoutSessionRequest = {
@@ -81,7 +81,7 @@ const createLineItems = (
     return line_item;
   });
 
-  return lineItems; // Add this line to return the lineItems array
+  return lineItems;
 };
 
 const createSession = async (
@@ -110,7 +110,7 @@ const createSession = async (
       restaurantId,
     },
     success_url: `${FRONTEND_URL}/order-status?success=true`,
-    cancel_url: `${FRONTEND_URL}detail/${restaurantId}?cancelled=true`,
+    cancel_url: `${FRONTEND_URL}/detail/${restaurantId}?cancelled=true`,
   });
 
   return sessionData;
