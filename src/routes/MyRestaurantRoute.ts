@@ -12,7 +12,19 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1025 }, // 5MB
 });
 
-router.get("/", jwtCheck, jwtParse, MyRestaurantControlller.getMyRestaurant);
+router.get(
+  "/order",
+  jwtCheck,
+  jwtParse,
+  MyRestaurantControlller.getMyRestaurant
+);
+
+router.get(
+  "/",
+  jwtCheck,
+  jwtParse,
+  MyRestaurantControlller.getMyRestaurantOrders
+);
 
 router.post(
   "/",
